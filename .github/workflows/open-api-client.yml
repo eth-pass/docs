@@ -1,0 +1,37 @@
+name: generate-clients
+on:
+  push:
+    branches:    
+      - 'main'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout your code
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v3
+        with:
+          path: static
+          
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: static
+
+      # Generate your OpenAPI document (if you don't write it manually)
+
+      # Use the action to generate a client package
+      # This uses the default path for the openapi document and thus assumes there is an openapi.json in the current workspace.
+      - name: Generate Angular Client
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: typescript-angular
+          openapi-file: ./static/openapi-component.yml
+
+      # Do something with the generated client (likely publishing it somewhere)
+      - name: Do something with the client
+        uses: actions/upload-artifact@v2
+        with:
+          name: typescript-angular
+          path: typescript-angular

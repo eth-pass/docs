@@ -1,0 +1,112 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.ethpass.xyz/api/
+info:
+  description: |
+    # Introduction
+    ETHPass is an API service for creating Apple Wallet passes from your NFTs. We make it easy to connect your NFTs to tickets, reservations, offers and so much more. 
+    You can engage with users anytime through location-based notifications, and real-time updates. 
+
+    # Authentication
+    The service uses API keys to authenticate requests. If you would like an application API Key please send an email to <a href="mailto:info@ethpass.xyz">info@ethpass.xyz</a>.
+    <SecurityDefinitions />
+
+  version: 0.1.0
+  title: API Reference
+  x-logo:
+    url: 'https://'
+    altText: logo
+tags:
+  - name: Passes
+    description: Passes
+  - name: pass_model
+    x-displayName: Pass Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/PassInput" />
+  - name: field_model
+    x-displayName: Field Model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Field" />
+
+x-tagGroups:
+  - name: General
+    tags:
+      - passes
+  # - name: Models
+  #   tags:
+  #     - pass_model
+  #     - field_model
+paths:
+  /v0/passes:
+    $ref: './v0/passes/index.yaml'
+  /v0/passes/{passId}:
+    $ref: './v0/passes/[id]/index.yaml'
+  /v0/passes/barcode:
+    $ref: './v0/passes/barcode.yaml'
+
+components:
+  schemas:
+    $ref: "./schemas/_index.yaml"
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    Id:
+      type: string
+      format: uuid
+      example: 00411fa4-19dc-4943-98e7-c0556fecf095
+      readOnly: true
+   
+
+    Field:
+      $ref: './schemas/field.yaml'
+      xml:
+        name: Field
+    Barcode:
+        type: object
+        properties:
+          format:
+            $ref: '#/components/schemas/BarcodeFormat'
+          message:
+            type: string
+          altText:
+            type: string
+            description: Text displayed near the barcode. 
+        required:
+          - format
+          - message
+    BarcodeFormat:
+      enum:
+        - BarcodeFormatQR
+        - BarcodeFormatPDF417
+        - BarcodeFormatAztec
+        - BarcodeFormatCode128
+      type: string    
+    Location:
+      additionalProperties: false
+      properties:
+        altitude:
+          type: number
+        latitude:
+          type: number
+        longitude:
+          type: number
+        relevantText:
+          type: string
+      required:
+        - latitude
+        - longitude
+      type: object
+  requestBodies:
+
+  securitySchemes:
+    Key:
+      type: apiKey
+      in: header
+      name: X-API-KEY

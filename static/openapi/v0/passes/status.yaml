@@ -1,0 +1,59 @@
+  get:
+      tags:
+        - passes
+      summary: Pass status
+      description: GET /v0/passes/status
+      operationId: getPassStatus
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  registered:
+                    type: boolean
+                  expired:
+                    type: boolean
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      security:
+        - Key: []
+          Scope: []
+      parameters:
+        - in: query
+          name: ownerAddress
+          required: true
+          schema:
+            type: string
+            description: Owner Address 
+        - in: query
+          name: contractAddress
+          required: true
+          schema:
+            type: string
+            description: Contract Address 
+        - in: query
+          name: tokenId
+          required: true
+          schema:
+            type: number
+            description: Token ID
+        - in: query
+          name: passTypeIdentifier
+          required: true
+          schema:
+            type: string
+            description: The pass identifier associated with your API key   

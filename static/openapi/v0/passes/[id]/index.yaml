@@ -1,0 +1,71 @@
+get:
+  tags:
+    - passes
+  summary: Get Pass
+  description:  GET /v0/passes/{passId}
+  operationId: getPassById
+  parameters:
+  - in: path
+    name: passId
+    schema:
+      type: integer
+    required: true
+    description: Numeric ID of the pass to get
+  responses:
+    '200':
+      description: Success
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    '401':
+      description: Unauthorized
+  security:
+    - Key: []
+      Scope: []
+patch:
+  tags:
+    - passes
+  summary: Update Pass
+  description: POST /v0/passes/{passId}
+  parameters:
+  - in: path
+    name: passId
+    schema:
+      type: integer
+    required: true
+    description: Numeric ID of the pass to get
+  responses:
+    "200":
+      description: Success
+    "400":
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    "401":
+      description: Unauthorized
+  security:
+    - Key: []
+      Scope: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            barcode:
+              $ref: "#/components/schemas/BarcodeInput"
+            pass:
+              anyOf:
+                - $ref: '#/components/schemas/PublicApplePass'
+                - $ref: '#/components/schemas/PublicGooglePass'

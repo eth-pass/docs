@@ -1,0 +1,54 @@
+type: object
+additionalProperties: false
+properties:
+  key:
+    description: The key must be unique within the scope of the entire pass
+    type: string
+  value:
+    description: Value of the field
+    anyOf:
+      - type: string
+      - type: number
+      - format: date-time
+        type: string
+  # attributedValue:
+  #   description: "The value may contain HTML markup for links. This key’s value overrides the text specified by the value key."
+  #   anyOf:
+  #     - type: string
+  #     - type: number
+  #     - format: date-time
+  #       type: string
+  # changeMessage:
+  #   description: Format string for the alert text that is displayed when the pass is updated. The format string must contain the escape %@, which is replaced with the field’s new value. For example, “Gate changed to %@.”  If you don’t specify a change message, the user isn’t notified when the field changes.
+  #   type: string
+  # currencyCode:
+  #   description: Information about how a number should be displayed in a field. These keys are optional if the field’s value is a number; otherwise, they are not allowed. Only one of these keys is allowed per field.
+  #   type: string
+  # dataDetectorTypes:
+  #   items:
+  #     type: string
+  #   type: array
+  # dateStyle:
+  #   type: string
+  # ignoresTimeZone:
+  #   type: boolean
+  # isRelative:
+  #   type: boolean
+  label:
+    description: Label text for the field.
+    type: string
+  # numberStyle:
+  #   description: Style of number to display. Must be one of the following values
+  #   enum: [PKNumberStyleDecimal,PKNumberStylePercent,PKNumberStyleScientific,PKNumberStyleSpellOut]
+  #   type: string
+  # semantics:
+  #   $ref: '#/components/schemas/Semantics'
+  textAlignment:
+    description: Alignment for the field’s contents. Must be one of the following values. The default value is natural alignment, which aligns the text appropriately based on its script direction. This key is not allowed for primary fields or back fields.
+    enum: [PKTextAlignmentLeft,PKTextAlignmentCenter,PKTextAlignmentRight,PKTextAlignmentNatural]
+    type: string
+  # timeStyle:
+  #   type: string
+required:
+  - key
+  - value
