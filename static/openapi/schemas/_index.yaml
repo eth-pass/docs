@@ -4,16 +4,11 @@ PassInput:
     contractAddress:
       type: string
       description: Contract Address
-    contractInterface:
-      $ref: '#/components/schemas/TokenInterface'
-      description: >-
-        Only required if smart contract supports both ERC721 & ERC-1155
-        tokens
     tokenId:
       type: string
       description: Token ID
     chainId:
-      $ref: '#/components/schemas/ChainId'
+      $ref: "#/components/schemas/ChainId"
     signature:
       type: string
       description: Signed message
@@ -21,20 +16,22 @@ PassInput:
       type: string
       description: Message used to request signature
     platform:
-      $ref: '#/components/schemas/Platform'
+      $ref: "#/components/schemas/Platform"
+    contractInterface:
+      $ref: "#/components/schemas/TokenInterface"
     barcode:
-      $ref: '#/components/schemas/BarcodeInput'
+      $ref: "#/components/schemas/BarcodeInput"
       description: Barcode message
     image:
       type: string
-      description: Custom image to be displayed on pass
+      description: Custom image to be displayed on pass. **(Max file size 600kb)**
     templateId:
       type: string
       description: Custom template
     pass:
       anyOf:
-        - $ref: '#/components/schemas/PublicApplePass'
-        - $ref: '#/components/schemas/PublicGooglePass'
+        - $ref: "#/components/schemas/PublicApplePass"
+        - $ref: "#/components/schemas/PublicGooglePass"
       description: >-
         Customize passes based on platform specifications
 
@@ -52,10 +49,11 @@ PassInput:
     - platform
   additionalProperties: false
 TokenInterface:
+  description: Required if smart contract supports both ERC721 & ERC-1155 token standards
   type: string
   enum:
-    - '0x80ac58cd'
-    - '0xd9b67a26'
+    - "0x80ac58cd"
+    - "0xd9b67a26"
 ChainId:
   type: number
   enum:
@@ -81,6 +79,13 @@ BarcodeInput:
   properties:
     message:
       type: string
+    redirect:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Use this field if you wish to redirect to your own service for verification. A query param named`barcodeSignature` will be appended to the URL provided with the barcode signature.
+
   required:
     - message
   additionalProperties: false
@@ -102,7 +107,7 @@ PublicApplePass:
     locations:
       type: array
       items:
-        $ref: '#/components/schemas/Location'
+        $ref: "#/components/schemas/Location"
     auxiliaryFields:
       type: array
       items:
@@ -136,7 +141,7 @@ PublicApplePass:
               - type: string
                 format: date-time
           semantics:
-            $ref: '#/components/schemas/Semantics'
+            $ref: "#/components/schemas/Semantics"
           dateStyle:
             type: string
           ignoresTimeZone:
@@ -155,19 +160,19 @@ PublicApplePass:
     backFields:
       type: array
       items:
-        $ref: '#/components/schemas/Field'
+        $ref: "#/components/schemas/Field"
     headerFields:
       type: array
       items:
-        $ref: '#/components/schemas/Field'
+        $ref: "#/components/schemas/Field"
     primaryFields:
       type: array
       items:
-        $ref: '#/components/schemas/Field'
+        $ref: "#/components/schemas/Field"
     secondaryFields:
       type: array
       items:
-        $ref: '#/components/schemas/Field'
+        $ref: "#/components/schemas/Field"
     appLaunchURL:
       type: string
     associatedStoreIdentifiers:
@@ -206,7 +211,7 @@ Semantics:
     awayTeamName:
       type: string
     balance:
-      $ref: '#/components/schemas/SemanticTagType.CurrencyAmount'
+      $ref: "#/components/schemas/SemanticTagType.CurrencyAmount"
     boardingGroup:
       type: string
     boardingSequenceNumber:
@@ -228,7 +233,7 @@ Semantics:
     departureGate:
       type: string
     departureLocation:
-      $ref: '#/components/schemas/SemanticTagType.Location'
+      $ref: "#/components/schemas/SemanticTagType.Location"
     departureLocationDescription:
       type: string
     departurePlatform:
@@ -244,7 +249,7 @@ Semantics:
     destinationGate:
       type: string
     destinationLocation:
-      $ref: '#/components/schemas/SemanticTagType.Location'
+      $ref: "#/components/schemas/SemanticTagType.Location"
     destinationLocationDescription:
       type: string
     destinationPlatform:
@@ -299,7 +304,7 @@ Semantics:
     originalDepartureDate:
       type: string
     passengerName:
-      $ref: '#/components/schemas/SemanticTagType.PersonNameComponents'
+      $ref: "#/components/schemas/SemanticTagType.PersonNameComponents"
     performerNames:
       type: array
       items:
@@ -309,7 +314,7 @@ Semantics:
     seats:
       type: array
       items:
-        $ref: '#/components/schemas/SemanticTagType.Seat'
+        $ref: "#/components/schemas/SemanticTagType.Seat"
     securityScreening:
       type: string
     silenceRequested:
@@ -317,7 +322,7 @@ Semantics:
     sportName:
       type: string
     totalPrice:
-      $ref: '#/components/schemas/SemanticTagType.CurrencyAmount'
+      $ref: "#/components/schemas/SemanticTagType.CurrencyAmount"
     transitProvider:
       type: string
     transitStatus:
@@ -333,7 +338,7 @@ Semantics:
     venueEntrance:
       type: string
     venueLocation:
-      $ref: '#/components/schemas/SemanticTagType.Location'
+      $ref: "#/components/schemas/SemanticTagType.Location"
     venueName:
       type: string
     venuePhoneNumber:
@@ -341,7 +346,7 @@ Semantics:
     venueRoom:
       type: string
     wifiAccess:
-      $ref: '#/components/schemas/SemanticTagType.WifiNetwork'
+      $ref: "#/components/schemas/SemanticTagType.WifiNetwork"
   additionalProperties: false
   description: Alphabetical order
 SemanticTagType.CurrencyAmount:
@@ -436,7 +441,7 @@ Field:
         - type: string
           format: date-time
     semantics:
-      $ref: '#/components/schemas/Semantics'
+      $ref: "#/components/schemas/Semantics"
     dateStyle:
       type: string
     ignoresTimeZone:
@@ -459,13 +464,13 @@ PublicGooglePass:
     messages:
       type: array
       items:
-        $ref: '#/components/schemas/walletobjects_v1.Schema$Message'
+        $ref: "#/components/schemas/walletobjects_v1.Schema$Message"
     textModulesData:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$TextModuleData'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$TextModuleData"
     linksModuleData:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$LinksModuleData'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$LinksModuleData"
     locations:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$LatLongPoint'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$LatLongPoint"
   additionalProperties: false
 walletobjects_v1.Schema$Message:
   type: object
@@ -474,9 +479,9 @@ walletobjects_v1.Schema$Message:
       description: The message body.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     displayInterval:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$TimeInterval'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$TimeInterval"
       description: >-
         The period of time that the message will be displayed to users. You
         can define both a `startTime` and `endTime` for each message. A
@@ -487,7 +492,7 @@ walletobjects_v1.Schema$Message:
       description: The message header.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     id:
       description: >-
         The ID associated with a message. This field is here to enable ease
@@ -496,32 +501,32 @@ walletobjects_v1.Schema$Message:
         be taken to select a reasonable ID for each message.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     kind:
       description: >-
         Identifies what kind of resource this is. Value: the fixed string
         `"walletobjects#walletObjectMessage"`.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     localizedBody:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$LocalizedString'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$LocalizedString"
       description: Translated strings for the message body.
     localizedHeader:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$LocalizedString'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$LocalizedString"
       description: Translated strings for the message header.
     messageType:
-      description: 'The type of the message. Currently, this can only be set for offers.'
+      description: "The type of the message. Currently, this can only be set for offers."
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
   additionalProperties: false
   description: A message that will be displayed with a Valuable
 walletobjects_v1.Schema$TimeInterval:
   type: object
   properties:
     end:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$DateTime'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$DateTime"
       description: >-
         End time of the interval. Offset is not required. If an offset is
         provided and `start` time is set, `start` must also include an
@@ -532,9 +537,9 @@ walletobjects_v1.Schema$TimeInterval:
         `"walletobjects#timeInterval"`.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     start:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$DateTime'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$DateTime"
       description: >-
         Start time of the interval. Offset is not required. If an offset is
         provided and `end` time is set, `end` must also include an offset.
@@ -571,13 +576,13 @@ walletobjects_v1.Schema$DateTime:
         locations across several time zones.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
   additionalProperties: false
 walletobjects_v1.Schema$LocalizedString:
   type: object
   properties:
     defaultValue:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$TranslatedString'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$TranslatedString"
       description: >-
         Contains the string to be displayed if no appropriate translation is
         available.
@@ -587,11 +592,11 @@ walletobjects_v1.Schema$LocalizedString:
         `"walletobjects#localizedString"`.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     translatedValues:
       type: array
       items:
-        $ref: '#/components/schemas/walletobjects_v1.Schema$TranslatedString'
+        $ref: "#/components/schemas/walletobjects_v1.Schema$TranslatedString"
       description: Contains the translations for the string.
   additionalProperties: false
 walletobjects_v1.Schema$TranslatedString:
@@ -603,19 +608,19 @@ walletobjects_v1.Schema$TranslatedString:
         `"walletobjects#translatedString"`.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     language:
       description: >-
         Represents the BCP 47 language tag. Example values are "en-US",
         "en-GB", "de", or "de-AT".
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     value:
       description: The UTF-8 encoded translated string.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
   additionalProperties: false
 walletobjects_v1.Schema$TextModuleData:
   type: object
@@ -627,28 +632,28 @@ walletobjects_v1.Schema$TextModuleData:
         string is displayed on smaller screens.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     header:
       description: >-
         The header of the Text Module. Recommended maximum length is 35
         characters to ensure full string is displayed on smaller screens.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     id:
       description: >-
         The ID associated with a text module. This field is here to enable
         ease of management of text modules.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     localizedBody:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$LocalizedString'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$LocalizedString"
       description: >-
         Translated strings for the body. Recommended maximum length is 500
         characters to ensure full string is displayed on smaller screens.
     localizedHeader:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$LocalizedString'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$LocalizedString"
       description: >-
         Translated strings for the header. Recommended maximum length is 35
         characters to ensure full string is displayed on smaller screens.
@@ -663,7 +668,7 @@ walletobjects_v1.Schema$LinksModuleData:
     uris:
       type: array
       items:
-        $ref: '#/components/schemas/walletobjects_v1.Schema$Uri'
+        $ref: "#/components/schemas/walletobjects_v1.Schema$Uri"
       description: The list of URIs.
   additionalProperties: false
 walletobjects_v1.Schema$Uri:
@@ -677,23 +682,23 @@ walletobjects_v1.Schema$Uri:
         `description` is part of an image.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     id:
       description: >-
         The ID associated with a uri. This field is here to enable ease of
         management of uris.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     kind:
       description: >-
         Identifies what kind of resource this is. Value: the fixed string
         `"walletobjects#uri"`.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     localizedDescription:
-      $ref: '#/components/schemas/walletobjects_v1.Schema$LocalizedString'
+      $ref: "#/components/schemas/walletobjects_v1.Schema$LocalizedString"
       description: >-
         Translated strings for the description. Recommended maximum is 20
         characters to ensure full string is displayed on smaller screens.
@@ -705,7 +710,7 @@ walletobjects_v1.Schema$Uri:
         number, or an email address). URIs must have a scheme.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
   additionalProperties: false
 walletobjects_v1.Schema$LatLongPoint:
   type: object
@@ -716,19 +721,19 @@ walletobjects_v1.Schema$LatLongPoint:
         `"walletobjects#latLongPoint"`.
       anyOf:
         - type: string
-        - type: 'null'
+        - type: "null"
     latitude:
       description: >-
         The latitude specified as any value in the range of -90.0 through
         +90.0, both inclusive. Values outside these bounds will be rejected.
       anyOf:
         - type: number
-        - type: 'null'
+        - type: "null"
     longitude:
       description: >-
         The longitude specified in the range -180.0 through +180.0, both
         inclusive. Values outside these bounds will be rejected.
       anyOf:
         - type: number
-        - type: 'null'
+        - type: "null"
   additionalProperties: false
