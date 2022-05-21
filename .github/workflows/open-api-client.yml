@@ -28,7 +28,7 @@ jobs:
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: typescript-angular
-          openapi-file: ./static/openapi-component.yml
+          openapi-file: static/openapi/index.yaml
 
       # Do something with the generated client (likely publishing it somewhere)
       - name: Do something with the client
