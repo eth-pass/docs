@@ -111,52 +111,7 @@ PublicApplePass:
     auxiliaryFields:
       type: array
       items:
-        type: object
-        additionalProperties: false
-        properties:
-          row:
-            type: number
-          attributedValue:
-            anyOf:
-              - type: string
-              - type: number
-              - type: string
-                format: date-time
-          changeMessage:
-            type: string
-          dataDetectorTypes:
-            type: array
-            items:
-              type: string
-          label:
-            type: string
-          textAlignment:
-            type: string
-          key:
-            type: string
-          value:
-            anyOf:
-              - type: string
-              - type: number
-              - type: string
-                format: date-time
-          semantics:
-            $ref: "#/components/schemas/Semantics"
-          dateStyle:
-            type: string
-          ignoresTimeZone:
-            type: boolean
-          isRelative:
-            type: boolean
-          timeStyle:
-            type: string
-          currencyCode:
-            type: string
-          numberStyle:
-            type: string
-        required:
-          - key
-          - value
+        $ref: "#/components/schemas/Field"
     backFields:
       type: array
       items:
@@ -416,18 +371,18 @@ SemanticTagType.WifiNetwork:
 Field:
   type: object
   properties:
-    attributedValue:
-      anyOf:
-        - type: string
-        - type: number
-        - type: string
-          format: date-time
-    changeMessage:
-      type: string
-    dataDetectorTypes:
-      type: array
-      items:
-        type: string
+    # attributedValue:
+    #   anyOf:
+    #     - type: string
+    #     - type: number
+    #     - type: string
+    #       format: date-time
+    # changeMessage:
+    #   type: string
+    # dataDetectorTypes:
+    #   type: array
+    #   items:
+    #     type: string
     label:
       type: string
     textAlignment:
@@ -440,20 +395,20 @@ Field:
         - type: number
         - type: string
           format: date-time
-    semantics:
-      $ref: "#/components/schemas/Semantics"
-    dateStyle:
-      type: string
-    ignoresTimeZone:
-      type: boolean
-    isRelative:
-      type: boolean
-    timeStyle:
-      type: string
-    currencyCode:
-      type: string
-    numberStyle:
-      type: string
+    # semantics:
+    #   $ref: "#/components/schemas/Semantics"
+    # dateStyle:
+    #   type: string
+    # ignoresTimeZone:
+    #   type: boolean
+    # isRelative:
+    #   type: boolean
+    # timeStyle:
+    #   type: string
+    # currencyCode:
+    #   type: string
+    # numberStyle:
+    #   type: string
   required:
     - key
     - value
