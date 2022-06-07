@@ -1,0 +1,41 @@
+get:
+  tags:
+    - passes
+  summary: Distribute pass by ID
+  description: GET /v0/passes/{passId}/distribute
+  operationId: getPassDeliveryById
+  parameters:
+    - in: path
+      name: passId
+      schema:
+        type: integer
+      required: true
+      description: Numeric ID of the pass to get
+
+  responses:
+    "200":
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              fileURL:
+                type: string
+              buffer:
+                type: buffer
+                description: File Buffer (Apple)
+    "400":
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    "401":
+      description: Unauthorized
+  security:
+    - Key: []
+      Scope: []

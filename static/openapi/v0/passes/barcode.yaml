@@ -1,50 +1,50 @@
-    get:
-      tags:
-        - passes
-      summary: Scan Barcode
-      description: GET /v0/passes/barcode
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  valid:
-                    required: true
-                    description: Current status of the pass
-                    type: boolean
-                  message:
-                    description: Original message set when pass was created
-                    type: string
-                  contractAddress:
-                    description:
-                    type: string
-                  tokenId:
-                    description:
-                    type: string                  
-                  chainId:
-                    description:
-                    type: number
-                  lastScannedAt:
-                    description: Timestamp of when barcode was last scanned
-                    type: timestamp
-                  lastSignedAt:
-                    description: Timestamp of when barcode data was last cryptographically signed by our service
-                    type: timestamp
-
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-      security:
-        - Key: []
-          Scope: []
-      parameters:
-        - in: query
-          name: data
-          required: true
+get:
+  tags:
+    - passes
+  summary: Scan Barcode
+  description: GET /v0/passes/barcode
+  responses:
+    "200":
+      description: Success
+      content:
+        application/json:
           schema:
-            type: string
-            description: Barcode data
+            type: object
+            properties:
+              valid:
+                required: true
+                description: Current status of the pass
+                type: boolean
+              message:
+                description: Original message set when pass was created
+                type: string
+              contractAddress:
+                description:
+                type: string
+              tokenId:
+                description:
+                type: string
+              chainId:
+                description:
+                type: number
+              lastScannedAt:
+                description: Timestamp of when barcode was last scanned
+                type: timestamp
+              # lastSignedAt:
+              #   description: Timestamp of when barcode data was last cryptographically signed by our service
+              #   type: timestamp
+
+    "400":
+      description: Bad Request
+    "401":
+      description: Unauthorized
+  security:
+    - Key: []
+      Scope: []
+  parameters:
+    - in: query
+      name: data
+      required: true
+      schema:
+        type: string
+        description: Barcode data
