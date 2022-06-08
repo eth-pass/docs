@@ -14,7 +14,7 @@ info:
   version: 0.1.0
   title: API Reference
   x-logo:
-    url: 'https://'
+    url: "https://"
     altText: logo
 tags:
   - name: Passes
@@ -38,73 +38,17 @@ x-tagGroups:
   #     - field_model
 paths:
   /v0/passes:
-    $ref: './v0/passes/index.yaml'
+    $ref: "./v0/passes/index.yaml"
   /v0/passes/{passId}:
-    $ref: './v0/passes/[id]/index.yaml'
+    $ref: "./v0/passes/[id]/index.yaml"
+  /v0/passes/{passId}/distribute:
+    $ref: "./v0/passes/[id]/distribute.yaml"
   /v0/passes/barcode:
-    $ref: './v0/passes/barcode.yaml'
+    $ref: "./v0/passes/barcode.yaml"
 
 components:
   schemas:
     $ref: "./schemas/_index.yaml"
-    ApiResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        type:
-          type: string
-        message:
-          type: string
-    Id:
-      type: string
-      format: uuid
-      example: 00411fa4-19dc-4943-98e7-c0556fecf095
-      readOnly: true
-   
-
-    Field:
-      $ref: './schemas/field.yaml'
-      xml:
-        name: Field
-    Barcode:
-        type: object
-        properties:
-          format:
-            $ref: '#/components/schemas/BarcodeFormat'
-          message:
-            type: string
-          altText:
-            type: string
-            description: Text displayed near the barcode. 
-        required:
-          - format
-          - message
-    BarcodeFormat:
-      enum:
-        - BarcodeFormatQR
-        - BarcodeFormatPDF417
-        - BarcodeFormatAztec
-        - BarcodeFormatCode128
-      type: string    
-    Location:
-      additionalProperties: false
-      properties:
-        altitude:
-          type: number
-        latitude:
-          type: number
-        longitude:
-          type: number
-        relevantText:
-          type: string
-      required:
-        - latitude
-        - longitude
-      type: object
-  requestBodies:
-
   securitySchemes:
     Key:
       type: apiKey

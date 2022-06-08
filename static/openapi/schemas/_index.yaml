@@ -24,7 +24,7 @@ PassInput:
       description: Barcode message
     image:
       type: string
-      description: Custom image to be displayed on pass. **(Max file size 600kb)**
+      description: Custom image to be displayed on pass. **(Max file size 500kb)**
     templateId:
       type: string
       description: Custom template

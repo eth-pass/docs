@@ -1,7 +1,7 @@
 post:
   tags:
     - passes
-  summary: Create Pass
+  summary: Create a new pass
   description: POST /v0/passes
   responses:
     "200":
@@ -37,12 +37,79 @@ post:
     content:
       application/json:
         schema:
-            $ref: '#/components/schemas/PassInput'
+          $ref: "#/components/schemas/PassInput"
 get:
   tags:
     - passes
-  summary: Get Passes
+  summary: Get all passes
   description: GET /v0/passes
+  parameters:
+    - in: query
+      name: lastScannedStartTime
+      description: Filter passes scanned on or after specified time <small><strong>(Unix timestamp in seconds)</strong></small>
+      schema:
+        type: number
+    - in: query
+      name: lastScannedEndTime
+      description: Filter passes scanned up to or before specified time <small><strong>(Unix timestamp in seconds)</strong></small>
+      schema:
+        type: number
+    - in: query
+      name: createdStartTime
+      description: Filter passes created on or after specified time <small><strong>(Unix timestamp in seconds)</strong></small>
+      schema:
+        type: number
+    - in: query
+      name: createdEndTime
+      description: Filter passes created up to or before specified time <small><strong>(Unix timestamp in seconds)</strong></small>
+      schema:
+        type: number
+    - in: query
+      name: expired
+      description: "`0` Filter active passes </br>`1` Filter expired passes </br><strong>Default:</strong> All passes"
+      schema:
+        type: number
+    - in: query
+      name: platform
+      description: Filter passes by platform
+      schema:
+        enum:
+          - apple
+          - google
+    - in: query
+      name: ownerAddress
+      description: Filter passes by owners wallet address
+      schema:
+        type: string
+    - in: query
+      name: contractAddress
+      description: Filter passes by smart contract address
+
+      schema:
+        type: string
+    - in: query
+      name: tokenId
+      description: Filter passes by smart token ID
+      schema:
+        type: string
+    - in: query
+      name: chainId
+      description: Filter passes by network chain ID
+      schema:
+        type: number
+        enum:
+          - 1
+          - 42
+          - 3
+          - 4
+          - 5
+          - 137
+          - 80001
+          - 10
+          - 69
+          - 42161
+          - 421611
+          - 31337
   responses:
     "200":
       description: Success
@@ -51,10 +118,8 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              message:
-                type: string
+            type: array
+
     "401":
       description: Unauthorized
   security:

@@ -1,20 +1,31 @@
 get:
   tags:
     - passes
-  summary: Get Pass
-  description:  GET /v0/passes/{passId}
+  summary: Get pass by ID
+  description: GET /v0/passes/{passId}
   operationId: getPassById
   parameters:
-  - in: path
-    name: passId
-    schema:
-      type: integer
-    required: true
-    description: Numeric ID of the pass to get
+    - in: path
+      name: passId
+      schema:
+        type: integer
+      required: true
+      description: Numeric ID of the pass to get
+    - in: query
+      name: scanHistoryStartTime
+      description: Include previous barcode scans starting from specified time <small><strong>(Unix timestamp in seconds)</strong></small>
+      schema:
+        type: number
+    - in: query
+      name: scanHistoryEndTime
+      description: Include previous barcode scans ending at specified time <small><strong>(Unix timestamp in seconds)</strong></small>
+      schema:
+        type: number
+
   responses:
-    '200':
+    "200":
       description: Success
-    '400':
+    "400":
       description: Bad Request
       content:
         application/json:
@@ -23,7 +34,7 @@ get:
             properties:
               message:
                 type: string
-    '401':
+    "401":
       description: Unauthorized
   security:
     - Key: []
@@ -31,15 +42,15 @@ get:
 patch:
   tags:
     - passes
-  summary: Update Pass
+  summary: Update an existing pass
   description: POST /v0/passes/{passId}
   parameters:
-  - in: path
-    name: passId
-    schema:
-      type: integer
-    required: true
-    description: Numeric ID of the pass to get
+    - in: path
+      name: passId
+      schema:
+        type: integer
+      required: true
+      description: Numeric ID of the pass to get
   responses:
     "200":
       description: Success
@@ -67,5 +78,5 @@ patch:
               $ref: "#/components/schemas/BarcodeInput"
             pass:
               anyOf:
-                - $ref: '#/components/schemas/PublicApplePass'
-                - $ref: '#/components/schemas/PublicGooglePass'
+                - $ref: "#/components/schemas/PublicApplePass"
+                - $ref: "#/components/schemas/PublicGooglePass"
