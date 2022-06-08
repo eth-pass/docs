@@ -1,9 +1,9 @@
 get:
   tags:
     - passes
-  summary: Distribute pass by ID
+  summary: Get pass distribution URL
   description: GET /v0/passes/{passId}/distribute
-  operationId: getPassDeliveryById
+  operationId: getPassDistributionById
   parameters:
     - in: path
       name: passId

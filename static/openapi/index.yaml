@@ -41,7 +41,7 @@ paths:
     $ref: "./v0/passes/index.yaml"
   /v0/passes/{passId}:
     $ref: "./v0/passes/[id]/index.yaml"
-  /v0/passes/{passId}/delivery:
+  /v0/passes/{passId}/distribute:
     $ref: "./v0/passes/[id]/distribute.yaml"
   /v0/passes/barcode:
     $ref: "./v0/passes/barcode.yaml"
