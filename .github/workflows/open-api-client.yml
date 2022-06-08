@@ -1,8 +1,9 @@
 name: generate-clients
 on:
+  pull_request:
   push:
-    branches:    
-      - 'main'
+    branches:
+      - "main"
 jobs:
   cron:
     runs-on: ubuntu-latest
@@ -14,7 +15,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           path: static
-          
+
       - name: Display structure of downloaded files
         run: ls -R
         working-directory: static
@@ -27,7 +28,7 @@ jobs:
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           generator: typescript-angular
-          openapi-file: ./static/openapi-component.yml
+          openapi-file: static/openapi/index.yaml
 
       # Do something with the generated client (likely publishing it somewhere)
       - name: Do something with the client
