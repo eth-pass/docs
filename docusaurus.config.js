@@ -101,7 +101,6 @@ const config = {
             position: "left",
             to: "/api",
           },
-          { to: "/blog", label: "Blog", position: "left" },
           {
             to: "https://api.ethpass.xyz",
             label: "Live Demo",
@@ -139,32 +138,6 @@ const config = {
               {
                 label: "Twitter",
                 href: "https://twitter.com/ethpass",
-              },
-            ],
-          },
-          {
-            title: "More",
-            items: [
-              {
-                label: "Blog",
-                to: "/blog",
-              },
-              {
-                label: "GitHub",
-                href: "https://github.com/eth-pass",
-              },
-            ],
-          },
-          {
-            title: "Legal",
-            items: [
-              // {
-              //   label: 'Privacy',
-              //   to: '/privacy',
-              // },
-              {
-                label: "Terms",
-                href: "/terms",
               },
             ],
           },
